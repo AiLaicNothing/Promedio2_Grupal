@@ -1,21 +1,22 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public abstract class BaseUnits : MonoBehaviour, IDamageable
 {
-    public int lifeMax = 100f;
-    public int lifeAct;
-    public int damage = 10f;
+    public float lifeMax = 100f;
+    public NetworkVariable<float> lifeAct = new();
+    public float damage = 10f;
 
     protected virtual void Start()
     {
-        lifeAct = lifeMax;
+        lifeAct.Value = lifeMax;
     }
 
     public virtual void TakeDamage(float damage)
     {
-        lifeAct -= damage;
+        lifeAct.Value -= damage;
 
-        if (lifeAct <= 0)
+        if (lifeAct.Value <= 0)
         {
             Dead();
         }
@@ -24,6 +25,6 @@ public abstract class BaseUnits : MonoBehaviour, IDamageable
     protected virtual void Dead()
     {
 
-        Destroy(gameObject);
+        GetComponent<NetworkObject>().Despawn();
     }
 }
