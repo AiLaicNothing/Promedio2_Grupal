@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseUnits : MonoBehaviour, IDamageable
+public abstract class BaseUnits : NetworkBehaviour, IDamageable
 {
     public float lifeMax = 100f;
     public float lifeAct;
