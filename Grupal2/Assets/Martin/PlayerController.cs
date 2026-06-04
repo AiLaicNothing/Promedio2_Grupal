@@ -25,7 +25,9 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     private readonly NetworkVariable<float> currentHp = new NetworkVariable<float>();
 
-    private readonly NetworkVariable<bool> transformedState = new NetworkVariable<bool>();
+    public readonly NetworkVariable<bool> transformedState = new NetworkVariable<bool>();
+
+    public readonly NetworkVariable<Teams> teamSide = new NetworkVariable<Teams>();
 
     private Rigidbody rb;
     private bool isTransformed;
@@ -34,7 +36,11 @@ public class PlayerController : NetworkBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody>();
 
-        if (IsServer) currentHp.Value = maxHp;
+        if (IsServer)
+        {
+            currentHp.Value = maxHp;
+            teamSide.Value = PlayerTeamManager.Instance.GetNextTeam();
+        }
 
         transformedState.OnValueChanged += OnTransformedChanged;
         ApplyTransformState(transformedState.Value);
