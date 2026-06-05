@@ -98,7 +98,7 @@ public class Helicopter : EnemyBase
         Vector3 direction = (target.transform.position - ShootPoint.transform.position).normalized;
         bullet.transform.forward = direction;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-
+        
         if (rb != null)
         {
             rb.linearVelocity = direction * 20;
