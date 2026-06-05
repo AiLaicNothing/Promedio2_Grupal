@@ -12,10 +12,25 @@ public abstract class GroundUnit : BaseUnits
     [SerializeField]
     protected float moveSpeed = 3.5f;
 
+    private float nextShootTime;
+
     protected NavMeshAgent agent;
 
-    protected Transform targetTransform;
+    [SerializeField] protected Transform targetTransform;
 
+    [SerializeField] private Transform FirePoint;
+
+    [SerializeField] private GameObject BulletPrefab;
+
+    [SerializeField] private LayerMask Target;
+
+    [Header("Attack")]
+    [SerializeField] protected float shootCooldown = 1f;
+
+    protected void Update()
+    {
+
+    }
     protected override void Start()
     {
         base.Start();
@@ -41,8 +56,73 @@ public abstract class GroundUnit : BaseUnits
     protected virtual void MoveToTarget()
     {
         if (targetTransform == null)
+        {
+            Debug.Log("Target NULL");
             return;
+        }
+
+        if (agent == null)
+        {
+            Debug.Log("Agent NULL");
+            return;
+        }
 
         agent.SetDestination(targetTransform.position);
+    }
+
+    public void Shoot()
+    {
+        if (Time.time < nextShootTime)
+            return;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 100, Target);
+
+        GroundUnit target = null;
+        float closestdistance = float.MaxValue;
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("GroundUnit"))
+            {
+                GroundUnit groundunit = collider.GetComponent<GroundUnit>();
+
+                if (groundunit.TeamNetwork == TeamNetwork)
+                {
+                    continue;
+                }
+
+                float distance = (collider.transform.position - transform.position).sqrMagnitude;
+
+                if (distance < closestdistance)
+                {
+                    closestdistance = distance;
+                    target = groundunit;
+                }
+            }
+        }
+
+        if (!target)
+        {
+            return;
+        }
+
+        nextShootTime = Time.time + shootCooldown;
+
+        GameObject bullet = Instantiate(
+            BulletPrefab,
+            FirePoint.position,
+            Quaternion.identity);
+
+        Vector3 direction =
+            (target.transform.position - FirePoint.position).normalized;
+
+        bullet.transform.forward = direction;
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * 20;
+        }
     }
 }

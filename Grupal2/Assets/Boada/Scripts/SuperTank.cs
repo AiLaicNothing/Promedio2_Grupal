@@ -5,17 +5,16 @@ public class SuperTank : GroundUnit
     protected override void Start()
     {
         lifeMax = 300f;
+        moveSpeed = 2f;
 
-        moveSpeed = 2f; 
+        shootCooldown = 2f;
 
         base.Start();
     }
 
     private void Update()
     {
-        if (!IsServer)
-            return;
-
+        Shoot();
         MoveToTarget();
     }
 }
