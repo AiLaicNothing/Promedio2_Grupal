@@ -1,73 +1,107 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Helicopter : EnemyBase
 {
-    GameObject[] PlayerTeam;
-    GameObject target;
+    GameObject[] playerTeam;
+    Teams teams;
     NavMeshAgent agent;
-    [SerializeField] GameObject Bullet;
-    [SerializeField] GameObject shootPoint;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject bullet;
+    [SerializeField] private Transform[] PatrolPoints;
+    [SerializeField] GameObject ShootPoint;
+    [SerializeField] GameObject BulletPrefab;
+    [SerializeField] float coolDown;
+    private float next = 4;
     [SerializeField] int speed=5;
-    public void ChooseTarget()
+    public NetworkVariable<Teams> teamStuff =new NetworkVariable<Teams>();
+    [SerializeField] private LayerMask theTarget;
+    public virtual void SetTeam(Teams newTeam)
     {
-        PlayerTeam = GameObject.FindGameObjectsWithTag("Player");
-        GameObject choose = PlayerTeam[0];
-        int position = 0;
+        teamStuff.Value = newTeam;
+    }
 
-        foreach (GameObject go in PlayerTeam)
-        {
-            float targetDistance = Vector3.Distance(transform.position, choose.transform.position);
-            float thisDistance = Vector3.Distance(transform.position, PlayerTeam[position].transform.position);
-            if (targetDistance > thisDistance)
-            {
-                choose = PlayerTeam[position];
-            }
-            position++;
-        }
-        target = choose;
-        transform.LookAt(target.transform);
+    public virtual void SetTarget(Transform[] target)
+    {
+        PatrolPoints = target;
     }
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
     }
     private void Update()
     {
-        ChooseTarget();
-        Move();
-        Shooting();
-    }
-    private void Move()
-    {
-        agent.destination = target.transform.position;
-    }
-    private void Shooting()
-    {
-        PlayerTeam = GameObject.FindGameObjectsWithTag("Player");
-        GameObject target = PlayerTeam[0];
-        int position = 0;
-
-        foreach (GameObject go in PlayerTeam)
-        {
-            float targetDistance = Vector3.Distance(transform.position, target.transform.position);
-            float thisDistance = Vector3.Distance(transform.position, PlayerTeam[position].transform.position);
-            if (targetDistance > thisDistance)
-            {
-                target = PlayerTeam[position];
-            }
-            position++;
-        }
-        transform.LookAt(target.transform);
         Shoot();
     }
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, shootPoint.transform.position, Quaternion.identity);
+        if (Time.time < coolDown)
+        {
+            return;
+        }
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 100, theTarget);
+        Helicopter ChopperTarget = null;
+        PlayerController playerTarget = null;
+        float closestdistance = float.MaxValue;
+
+        foreach(Collider targets in colliders)
+        {
+            Helicopter helicopter = targets.GetComponent<Helicopter>();
+            PlayerController player=targets.GetComponent<PlayerController>();
+            if(helicopter==null&&player==null)
+            {
+                continue;
+            }
+            Vector3 TargetPosition;
+            Teams TargetTeam;
+            if(helicopter!=null)
+            {
+                TargetPosition = helicopter.transform.position;
+                TargetTeam = helicopter.teams;
+            }
+            else
+            {
+                TargetPosition = player.transform.position;
+                TargetTeam = player.teamSide.Value;
+            }
+            if(TargetTeam==teams)
+            {
+                continue;
+            }
+            float distance = (TargetPosition - transform.position).sqrMagnitude;
+            if (distance < closestdistance)
+            {
+                closestdistance = distance;
+                if(helicopter!=null)
+                {
+                    ChopperTarget=helicopter;
+                }
+                else
+                {
+                    playerTarget = player;
+                }
+            }
+        }
+        Transform target = null;
+        if(ChopperTarget!=null)
+        {
+            target = ChopperTarget.gameObject.transform;
+        }
+        else if(playerTarget!=null)
+        {
+            target = playerTarget.gameObject.transform;
+        }
+        next = Time.time + coolDown;
+        GameObject bullet = Instantiate(BulletPrefab, ShootPoint.transform.position, Quaternion.identity);
+        Vector3 direction = (target.transform.position - ShootPoint.transform.position).normalized;
+        bullet.transform.forward = direction;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = Vector3.forward * speed;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * 20;
+        }
     }
 }
