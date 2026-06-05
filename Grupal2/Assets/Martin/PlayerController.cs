@@ -57,6 +57,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         HandleTransformInput();
         HandleRotation();
+        ShootServerRpc();
     }
 
     private void FixedUpdate()
@@ -155,7 +156,50 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [ServerRpc]
     private void ShootServerRpc()
     {
-        // Spawn bullet on server here if needed.
+
+        if (isTransformed) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        Transform target = FindClosestTarget();
+
+
+        if (isTransformed == true)
+        {
+            Debug.Log("Cant shoot is transformed");
+            return;
+        }
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+
+        Vector3 dir;
+
+        if (target != null)
+        {
+            dir = (target.position - firePoint.position);
+        }
+        else
+        {
+            dir = firePoint.transform.forward;
+        }
+
+        bullet.transform.forward = dir;
+
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        bullet.GetComponent<PlayerBullet>().SetTeam(teamSide.Value);
+        bullet.GetComponent<PlayerBullet>().SetDamage(damage);
+
+        if (bulletRb != null)
+        {
+            bulletRb.linearVelocity = dir * 22f;
+        }
     }
 
     public void TakeDamage(float damage)
