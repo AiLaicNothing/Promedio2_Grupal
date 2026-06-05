@@ -24,7 +24,9 @@ public abstract class BaseUnits : NetworkBehaviour, IDamageable
 
     protected virtual void Dead()
     {
-
-        Destroy(gameObject);
+        if (IsServer)
+        {
+            NetworkObject.Despawn();
+        }
     }
 }

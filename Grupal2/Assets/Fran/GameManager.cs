@@ -1,38 +1,46 @@
+using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-
-
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance;
 
-    public bool gameOver = false;
+    public static Action<bool> OnGameFinished;
+
+    private bool gameEnded;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        Instance = this;
     }
 
-    public void WinGame()
+    public void EndGame(Teams winnerTeam)
     {
-        if (gameOver) return;
+        if (gameEnded)
+            return;
 
-        gameOver = true;
-        Debug.Log("Victoria");
+        gameEnded = true;
+
+        FinishGameClientRpc(winnerTeam);
     }
 
-    public void LoseGame()
+    [ClientRpc]
+    private void FinishGameClientRpc(Teams winnerTeam)
     {
-        if (gameOver) return;
+        PlayerController[] players =
+            FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
 
-        gameOver = true;
-        Debug.Log("Derrota");
+        foreach (PlayerController player in players)
+        {
+            if (player.IsOwner)
+            {
+                bool won = player.teamSide.Value == winnerTeam;
+
+                OnGameFinished?.Invoke(won);
+
+                break;
+            }
+        }
     }
 }
-
-// Ejemplo de uso:
-// GameManager.Instance.WinGame();
-// GameManager.Instance.LoseGame();
