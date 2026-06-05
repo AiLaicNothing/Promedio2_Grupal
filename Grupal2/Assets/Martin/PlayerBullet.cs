@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerBullet : MonoBehaviour
+public class PlayerBullet : NetworkBehaviour
 {
     private float damage;
     private Teams teamSide;
@@ -28,6 +29,7 @@ public class PlayerBullet : MonoBehaviour
             else
             {
                 player.TakeDamage(damage);
+                gameObject.GetComponent<NetworkObject>().Despawn();
             }
         }
         else if (other.gameObject.CompareTag("GroundUnit"))
@@ -54,6 +56,7 @@ public class PlayerBullet : MonoBehaviour
             else
             {
                 unit.TakeDamage(damage);
+                gameObject.GetComponent<NetworkObject>().Despawn();
             }
         }
     }
