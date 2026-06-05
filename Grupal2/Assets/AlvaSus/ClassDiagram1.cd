@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Helicopter">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACgARQAAAAMAAAAAAAAAAQAACEAAQCIAAgI=</HashCode>
+      <FileName>Assets\AlvaSus\Scripts\Helicopter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirBullet">
+    <Position X="10" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAgAAAAAAAAAAAAAAAAgABSEAAAAAAAAI=</HashCode>
+      <FileName>Assets\AlvaSus\Scripts\AirBullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GroundUnit">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAEAECCAFQAAAAEAACAAAAAIAAAAAAAAACAAAAI=</HashCode>
+      <FileName>Assets\Boada\Scripts\GroundUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperTank">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Boada\Scripts\SuperTank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tank">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Boada\Scripts\Tank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EconomyManager">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAgAAAAAAAIBEAAAAAAAAAAAQAAAAAAAQEA=</HashCode>
+      <FileName>Assets\Fran\EconomyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAQAAAAAARAEA=</HashCode>
+      <FileName>Assets\Fran\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAQAAAAAcwAApCCEJkAAAKiAAAJCAAAACABAgAACAAI=</HashCode>
+      <FileName>Assets\Martin\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PlayerTeamManager">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Martin\TeamSides\PlayerTeamManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LobbyManager">
+    <Position X="14" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAKBAAAAgBAAAAABAgAAAAAAAAAAAAABAEAA=</HashCode>
+      <FileName>Assets\Martin\Server\LobbyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseUnits">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAgAAAgAAAAAAAAAAAAAAAAAAAigAAAAA=</HashCode>
+      <FileName>Assets\Roseling\BaseUnits.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="IDamageable">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Roseling\IDamageable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Teams">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Martin\TeamSides\Teams.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
