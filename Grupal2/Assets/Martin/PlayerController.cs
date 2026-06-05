@@ -224,6 +224,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
+        bullet.GetComponent<NetworkObject>().Spawn();
 
         Vector3 dir;
 
