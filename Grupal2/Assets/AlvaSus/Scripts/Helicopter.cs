@@ -9,7 +9,6 @@ public class Helicopter : EnemyBase
     GameObject[] playerTeam;
     Teams teams;
     NavMeshAgent agent;
-    [SerializeField] GameObject bullet;
     [SerializeField] private Transform[] PatrolPoints;
     [SerializeField] GameObject ShootPoint;
     [SerializeField] GameObject BulletPrefab;
@@ -98,10 +97,11 @@ public class Helicopter : EnemyBase
         Vector3 direction = (target.transform.position - ShootPoint.transform.position).normalized;
         bullet.transform.forward = direction;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        
+        AirBullet airBullet=bullet.GetComponent<AirBullet>();
+        airBullet.teamStuff.Value = this.teamStuff.Value;
         if (rb != null)
         {
-            rb.linearVelocity = direction * 20;
+            rb.linearVelocity = direction * speed;
         }
     }
 }
