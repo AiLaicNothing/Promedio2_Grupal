@@ -86,7 +86,7 @@ public abstract class GroundUnit : BaseUnits
             {
                 GroundUnit groundunit = collider.GetComponent<GroundUnit>();
 
-                if (groundunit.TeamNetwork == TeamNetwork)
+                if (groundunit.TeamNetwork.Value == TeamNetwork.Value)
                 {
                     continue;
                 }
