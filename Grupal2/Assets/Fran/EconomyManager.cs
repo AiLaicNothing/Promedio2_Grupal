@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class EconomyManager : MonoBehaviour
+public class EconomyManager : NetworkBehaviour
 {
     public static EconomyManager Instance;
 
@@ -75,7 +76,13 @@ public class EconomyManager : MonoBehaviour
         else if (team == 2)
             team2Money += amount;
     }
+
+
+
+
 }
+
+
 
 // Ejemplo de uso:
 //

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
-public class Helicopter : EnemyBase
+public class Helicopter : BaseUnits
 {
     GameObject[] playerTeam;
     Teams teams;
@@ -58,14 +58,14 @@ public class Helicopter : EnemyBase
             if(helicopter!=null)
             {
                 TargetPosition = helicopter.transform.position;
-                TargetTeam = helicopter.teams;
+                TargetTeam = helicopter.teamStuff.Value;
             }
             else
             {
                 TargetPosition = player.transform.position;
                 TargetTeam = player.teamSide.Value;
             }
-            if(TargetTeam==teams)
+            if(TargetTeam== teamStuff.Value)
             {
                 continue;
             }
@@ -84,16 +84,27 @@ public class Helicopter : EnemyBase
             }
         }
         Transform target = null;
-        if(ChopperTarget!=null)
+
+        if (ChopperTarget != null)
         {
-            target = ChopperTarget.gameObject.transform;
+            target = ChopperTarget.transform;
         }
-        else if(playerTarget!=null)
+        else if (playerTarget != null)
         {
-            target = playerTarget.gameObject.transform;
+            target = playerTarget.transform;
         }
+
+        if (target == null)
+        {
+            return;
+        }
+
         next = Time.time + coolDown;
-        GameObject bullet = Instantiate(BulletPrefab, ShootPoint.transform.position, Quaternion.identity);
+
+        GameObject bullet = Instantiate(
+            BulletPrefab,
+            ShootPoint.transform.position,
+            Quaternion.identity);
         Vector3 direction = (target.transform.position - ShootPoint.transform.position).normalized;
         bullet.transform.forward = direction;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();

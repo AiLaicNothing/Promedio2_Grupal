@@ -34,6 +34,8 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public override void OnNetworkSpawn()
     {
+        Debug.Log("Player Spawned");
+
         rb = GetComponent<Rigidbody>();
 
         if (IsServer)
@@ -58,6 +60,45 @@ public class PlayerController : NetworkBehaviour, IDamageable
         HandleTransformInput();
         HandleRotation();
         ShootServerRpc();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            BuyUnitServerRpc(1, 100);
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            BuyUnitServerRpc(2, 200);
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            BuyUnitServerRpc(3, 150);
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            BuyUnitServerRpc(4, 300);
+    }
+
+
+
+
+
+    [ServerRpc]
+    private void BuyUnitServerRpc(int type, int cost)
+    {
+        Teams myTeam = teamSide.Value;
+
+        int teamID = myTeam == Teams.Red ? 1 : 2;
+
+        if (!EconomyManager.Instance.SpendMoney(teamID, cost))
+            return;
+
+        BaseSpawner[] spawners =
+            FindObjectsByType<BaseSpawner>(FindObjectsSortMode.None);
+
+        foreach (BaseSpawner spawner in spawners)
+        {
+            if (spawner.Team == myTeam)
+            {
+                spawner.Spawnpoint(type);
+                break;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -100,11 +141,16 @@ public class PlayerController : NetworkBehaviour, IDamageable
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
 
+        Debug.Log($"X:{inputX} Y:{inputY}");
+
         Vector3 moveDir = new Vector3(inputX, 0f, inputY).normalized;
 
         float desiredSpeed = isTransformed ? transformSpeed : moveSpeed;
 
         Vector3 velocity = moveDir * desiredSpeed;
+
+        Debug.Log("Velocity: " + velocity);
+
         velocity.y = rb.linearVelocity.y;
         rb.linearVelocity = velocity;
     }
