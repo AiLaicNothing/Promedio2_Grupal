@@ -1,7 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 
-public abstract class BaseUnits : NetworkBehaviour, IDamageable
+public abstract class EnemyBase : NetworkBehaviour, IDamageable
 {
     public float lifeMax = 100f;
     public float lifeAct;
