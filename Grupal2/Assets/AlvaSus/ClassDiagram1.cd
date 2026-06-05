@@ -1,43 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Helicopter">
-    <Position X="7.25" Y="6.75" Width="1.5" />
+    <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACgARQAAAAMAAAAAAAAAAQAACEAAQCIAAgI=</HashCode>
       <FileName>Assets\AlvaSus\Scripts\Helicopter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EnemyBase">
-    <Position X="10" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAgAAAgAAAAAAAAAAAAAAAAAAAigAAAAA=</HashCode>
-      <FileName>Assets\AlvaSus\Scripts\EnemyBase.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="AirBullet">
-    <Position X="10" Y="9.5" Width="1.5" />
+    <Position X="10" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAgAAAAAAAAAAAAAAAAgABSEAAAAAAAAI=</HashCode>
       <FileName>Assets\AlvaSus\Scripts\AirBullet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GroundUnit">
-    <Position X="7.25" Y="2.25" Width="1.5" />
+    <Position X="5.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAEAECCAFQAAAAEAACAAAAAIAAAAAAAAACAAAAI=</HashCode>
       <FileName>Assets\Boada\Scripts\GroundUnit.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SuperTank">
-    <Position X="10" Y="1.75" Width="1.5" />
+    <Position X="8" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Boada\Scripts\SuperTank.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Tank">
-    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Boada\Scripts\Tank.cs</FileName>
@@ -53,14 +45,14 @@
   <Class Name="GameManager">
     <Position X="16.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQACAAAAAAMA=</HashCode>
+      <HashCode>AAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAQAAAAAARAEA=</HashCode>
       <FileName>Assets\Fran\GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PlayerController">
     <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>cAQAAAAAcwAApCCEJgAAAKiAAAJCAAAACABAgAACAAI=</HashCode>
+      <HashCode>cAQAAAAAcwAApCCEJkAAAKiAAAJCAAAACABAgAACAAI=</HashCode>
       <FileName>Assets\Martin\PlayerController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -73,14 +65,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="LobbyManager">
-    <Position X="15" Y="6" Width="1.5" />
+    <Position X="14" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAKBAAAAgBAAAAABAgAAAAAAAAAAAAABAEAA=</HashCode>
       <FileName>Assets\Martin\Server\LobbyManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseUnits">
-    <Position X="10" Y="3.75" Width="1.5" />
+    <Position X="8" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAgAAAgAAAAAAAAAAAAAAAAAAAigAAAAA=</HashCode>
       <FileName>Assets\Roseling\BaseUnits.cs</FileName>
@@ -88,7 +80,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="IDamageable">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Assets\Roseling\IDamageable.cs</FileName>
