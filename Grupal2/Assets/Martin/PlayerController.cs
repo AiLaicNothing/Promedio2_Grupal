@@ -27,7 +27,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
 
     public readonly NetworkVariable<bool> transformedState = new NetworkVariable<bool>();
 
-    public readonly NetworkVariable<Teams> teamSide = new NetworkVariable<Teams>();
+    public NetworkVariable<Teams> teamSide = new NetworkVariable<Teams>();
 
     private Rigidbody rb;
     private bool isTransformed;
@@ -202,6 +202,7 @@ public class PlayerController : NetworkBehaviour, IDamageable
     [ServerRpc]
     private void ShootServerRpc()
     {
+        if (!IsOwner) return;
 
         if (isTransformed) return;
 
@@ -242,10 +243,10 @@ public class PlayerController : NetworkBehaviour, IDamageable
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bullet.GetComponent<PlayerBullet>().SetTeam(teamSide.Value);
         bullet.GetComponent<PlayerBullet>().SetDamage(damage);
-
+        bullet.GetComponent<PlayerBullet>().SetDirection(dir);
         if (bulletRb != null)
         {
-            bulletRb.linearVelocity = dir * 22f;
+            //bulletRb.linearVelocity = dir * 22f;
         }
     }
 

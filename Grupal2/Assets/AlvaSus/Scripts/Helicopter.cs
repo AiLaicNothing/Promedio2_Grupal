@@ -36,7 +36,7 @@ public class Helicopter : BaseUnits
     }
     private void Shoot()
     {
-        if (Time.time < coolDown)
+        if (Time.time < next)
         {
             return;
         }

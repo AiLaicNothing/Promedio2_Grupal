@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 810977697729093339}
   - component: {fileID: 1592294360504216431}
   - component: {fileID: 6172847402063339177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -435,6 +435,11 @@ MonoBehaviour:
   rotationSpeed: 12
   normalModel: {fileID: 2116290245352046420}
   transformModel: {fileID: 4262892497120549557}
+  teamSide:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
+    m_InternalValue: 0
 --- !u!1 &6720863805940806153
 GameObject:
   m_ObjectHideFlags: 0

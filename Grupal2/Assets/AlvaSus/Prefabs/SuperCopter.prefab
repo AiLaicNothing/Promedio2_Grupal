@@ -438,7 +438,7 @@ MonoBehaviour:
     m_InternalValue: 0
   theTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!54 &7264902669761933568
 Rigidbody:
   m_ObjectHideFlags: 0

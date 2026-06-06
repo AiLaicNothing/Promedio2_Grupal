@@ -5,7 +5,23 @@ public class PlayerBullet : NetworkBehaviour
 {
     private float damage;
     private Teams teamSide;
+    private Vector3 direction;
+    private Rigidbody rb;
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        rb.linearVelocity = direction * 22f;
+    }
+
+    public void SetDirection(Vector3 dir)
+    {
+        direction = dir;
+    }
     public void SetDamage(float damage)
     {
         this.damage = damage;
